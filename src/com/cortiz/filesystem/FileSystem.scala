@@ -11,7 +11,7 @@ import java.util.Scanner
 //entry point de la app
 object FileSystem extends App{
   val root = Directory.ROOT
-  //estado inicial VARIABLE, por defecto con root como dir raiz y dir actual, llama a State.apply() con output "" por defecto
+  //estado inicial VARIABLE, por defecto usando  root como dir raiz y dir actual (WD), llama a State.apply() con output "" por defecto
   var state = State(root,root)
 
   val scanner = new Scanner(System.in)

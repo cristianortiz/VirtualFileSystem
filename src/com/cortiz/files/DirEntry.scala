@@ -9,9 +9,21 @@ package com.cortiz.files
 
 abstract class DirEntry(val parentPath: String, val name: String) {
   //ruta absoluta de un directorio
-  def path: String = parentPath + Directory.SEPARATOR + name
+  def path: String = {
+    val separatorIfNecesary =
+      if (Directory.ROOT_PATH.equals(parentPath)) ""
+      else Directory.SEPARATOR
+    parentPath + separatorIfNecesary + name
+  }
 
   def asDirectory: Directory
+
+  def asFile: File
+
   def getType: String
+
+  def isDirectory: Boolean
+
+  def isFile: Boolean
 
 }

@@ -1,5 +1,7 @@
 package com.cortiz.files
 
+import com.cortiz.filesystem.FileSystemException
+
 import scala.annotation.tailrec
 
 /**
@@ -16,6 +18,7 @@ class Directory(override val parentPath: String, override val name: String, val 
    nombre que el nuevo elemento a agregar, luego se agrega el nuevo elemento a la nueva estructura de directorios*/
     new Directory(parentPath, name, contents.filter(e => !e.name.equals(entryName)) :+ newEntry)
 
+  def isRoot: Boolean = parentPath.isEmpty
 
   def findEntry(entryName: String): DirEntry = {
     @tailrec
@@ -48,6 +51,10 @@ class Directory(override val parentPath: String, override val name: String, val 
     findEntry(name) != null
 
   def asDirectory: Directory = this
+  def asFile: File = throw new FileSystemException("un directorio no se pude convertir en archivo!")
+
+  def isDirectory: Boolean = true
+  def isFile: Boolean = false
 
   override def getType: String = "Directory"
 }
